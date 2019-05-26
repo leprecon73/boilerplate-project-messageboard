@@ -13,27 +13,27 @@
     <header>
       <h1 id='boardTitle'></h1>
     </header>
-    
-    <div id='submitNewThread'>
-      <h3>Submit a new thread:</h3>
-      <form id="newThread" method="post" action="/api/">
-        <textarea rows="8" cols="120" type='text' placeholder='Thread text...' name='text' required=''></textarea><br>
-        <input type='text' placeholder='password to delete' name='delete_password' required=''><br>
-        <input type="submit" value="Submit">
-      </form>
-    </div>
-    
+
+    <div id='submitNewThread'></div>
+
     <div id='boardDisplay'></div>
-    
+
     <hr style='margin: 50px; margin-top: 200px'>
-    
+
     <script src="https://code.jquery.com/jquery-2.2.1.min.js"
             integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
             crossorigin="anonymous"></script>
     <script>
       $(function() {
         var currentBoard = window.location.pathname.slice(3,-1);
-        var url = "/api/threads/"+currentBoard;
+        var url = "/api/threads/" + currentBoard;
+        let formHtml = ['<h3>Submit a new thread:</h3>'];
+        formHtml.push('<form id="newThread" method="post" action="/api/threads/"' + currentBoard + '">');
+        formHtml.push('<textarea rows="8" cols="120" type="text" placeholder="Thread text..." name="text" required=""></textarea><br>');
+        formHtml.push('<input type="text" placeholder="password to delete" name="delete_password" required=""><br>');
+        formHtml.push('<input type="submit" value="Submit">');
+        formHtml.push('</form>');
+        $('#submitNewThread').html(formHtml.join(''));
         $('#boardTitle').text('Welcome to '+window.location.pathname)
         $.ajax({
           type: "GET",
@@ -76,11 +76,11 @@
             $('#boardDisplay').html(boardThreads.join(''));
           }
         });
-        
+
         $('#newThread').submit(function(){
           $(this).attr('action', "/api/threads/" + currentBoard);
         });
-        
+
         $('#boardDisplay').on('submit','#reportThread', function(e) {
           var url = "/api/threads/"+currentBoard;
           $.ajax({
@@ -110,7 +110,7 @@
             success: function(data) { alert(data) }
           });
           e.preventDefault();
-        });        
+        });
         $('#boardDisplay').on('submit','#deleteReply', function(e) {
           var url = "/api/replies/"+currentBoard;
           $.ajax({
@@ -120,7 +120,7 @@
             success: function(data) { alert(data) }
           });
           e.preventDefault();
-        });              
+        });
       });
    </script>
   </body>
