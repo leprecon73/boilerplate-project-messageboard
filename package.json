@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "cross-env NODE_ENV=test mocha -u tdd --full-trace tests/*.js",
-    "snyk-protect": "snyk protect",
+    "snyk-protect": "snyk-protect",
     "prepare": "npm run snyk-protect"
   },
   "dependencies": {
@@ -23,7 +23,7 @@
     "mongodb": "^3.6.6",
     "mongoose": "^6.4.6",
     "zombie": "^6.1.4",
-    "snyk": "^1.530.0"
+    "@snyk/protect": "latest"
   },
   "engines": {
     "node": "4.4.3"
