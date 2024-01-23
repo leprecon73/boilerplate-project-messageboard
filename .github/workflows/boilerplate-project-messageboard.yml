@@ -1,4 +1,4 @@
-name: VSA Build and reporting
+name: Boiler Plate Project Message Board Build and reporting
 
 on:
   push:
