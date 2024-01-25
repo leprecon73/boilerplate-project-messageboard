@@ -17,13 +17,13 @@
     "chai": "^4.3.4",
     "chai-http": "^4.4.0",
     "cors": "^2.8.5",
-    "express": "^4.17.3",
+    "express": "^4.18.2",
     "helmet": "^3.21.1",
     "mocha": "^10.1.0",
     "mongodb": "^3.6.6",
     "mongoose": "^6.12.0",
     "zombie": "^6.1.4",
-    "@snyk/protect": "latest"
+    "@snyk/protect": "1.1267.0"
   },
   "engines": {
     "node": "4.4.3"
