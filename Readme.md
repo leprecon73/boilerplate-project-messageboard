@@ -13,3 +13,7 @@ Test your project here:
 * [Legacy test suite](https://legacy-fcc-test-suite.glitch.me/)
 
 * [Another](https://pricey-hugger.glitch.me/)
+
+## About me
+
+[![GitHub followers](https://img.shields.io/github/followers/jesperancinha.svg?label=Jesperancinha&style=for-the-badge&logo=github&color=grey "GitHub")](https://github.com/jesperancinha)
