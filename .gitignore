@@ -1,1 +1,5 @@
 node_modules
+.idea
+*.iml
+yarn.lock
+package-lock.json
