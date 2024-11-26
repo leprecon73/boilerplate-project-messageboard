@@ -13,7 +13,7 @@ const helmet = require("helmet");
 app.use(helmet({
   xFrameOptions: { action: 'sameorigin' },
   xDnsPrefetchControl: { allow: false },
-  referrerPolicy: { policy: "same-origin" },
+  referrerPolicy: { policy: "origin" },
 }));
 
 app.use('/public', express.static(process.cwd() + '/public'));
