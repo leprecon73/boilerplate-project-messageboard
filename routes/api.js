@@ -14,3 +14,12 @@ let mongoose = require('mongoose');
 //const { MongoClient, ServerApiVersion } = require('mongodb');
 
 mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
+const schemaReply = new mongoose.Schema({
+  text: String,
+  created_on: Date,
+  bumped_on: Date,
+  reported: Boolean,
+  delete_password: String
+})
+const modelReply = mongoose.model('repliessss', schemaReply)
