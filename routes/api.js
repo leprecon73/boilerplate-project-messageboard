@@ -1,5 +1,5 @@
 'use strict';
-
+let mongodb = require('mongodb');
 module.exports = function (app) {
   
   app.route('/api/threads/:board');
