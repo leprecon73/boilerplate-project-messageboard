@@ -12,11 +12,9 @@ const app = express();
 const helmet = require("helmet");
 app.use(
   helmet({
-    xFrameOptions: { action: "deny" },
-    xDnsPrefetchControl: { allow: true },
-    referrerPolicy: {
-      policy: 'same-origin'
-    },
+    xFrameOptions: { action: 'sameorigin' },
+    xDnsPrefetchControl: { allow: false },
+    referrerPolicy: { policy: 'same-origin' }
   })
 )
 
