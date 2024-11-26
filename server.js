@@ -12,10 +12,13 @@ const app = express();
 const helmet = require("helmet");
 app.use(
   helmet({
-    xFrameOptions: { action: "sameorigin" },
-    referrerPolicy: { policy: "same-origin" },
+    xFrameOptions: { action: "deny" },
+    xDnsPrefetchControl: { allow: true },
+    referrerPolicy: {
+      policy: 'same-origin'
+    },
   })
-);
+)
 
 app.use('/public', express.static(process.cwd() + '/public'));
 
