@@ -10,11 +10,11 @@ const runner            = require('./test-runner');
 
 const app = express();
 const helmet = require("helmet");
-app.use(helmet({
+/*app.use(helmet({
   referrerPolicy: { policy: "same-origin" },
   dnsPrefetchControl: true,
   frameguard: { action: "sameorigin" }
-}));
+}));*/
 
 app.use('/public', express.static(process.cwd() + '/public'));
 
