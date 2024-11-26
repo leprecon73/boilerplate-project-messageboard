@@ -10,13 +10,10 @@ const runner            = require('./test-runner');
 
 const app = express();
 const helmet = require("helmet");
-app.use(
-  helmet({
-    xFrameOptions: { action: 'sameorigin' },
-    xDnsPrefetchControl: { allow: false },
-    referrerPolicy: { policy: 'same-origin' }
-  })
-)
+app.use(helmet.frameguard({ action: 'deny' }))
+app.use(helmet({
+  xDnsPrefetchControl: { allow: true },
+}))
 
 app.use('/public', express.static(process.cwd() + '/public'));
 
