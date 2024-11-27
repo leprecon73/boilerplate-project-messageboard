@@ -25,9 +25,8 @@ const replySchema = new mongoose.Schema({
 const modelReply = mongoose.model('Reply', replySchema) 
 
 module.exports = function (app) {
-  
-  
-  app.route('/api/threads/:board')
+
+app.route('/api/threads/:board')
 .post(async function(req, res) {
   /** The saved database record will have at least the fields _id, 
    * text, created_on(date & time), bumped_on(date & time, starts same as created_on), 
@@ -45,6 +44,7 @@ module.exports = function (app) {
 
   res.redirect(`/b/${req.params.board}/`)
 })
+
     
   app.route('/api/replies/:board')
   .post(async (req, res) => {
@@ -58,7 +58,7 @@ module.exports = function (app) {
       { new: true }
     );
 
-    if (!thread) return res.status(404).send('Thread not found');
+    if (!thread) return res.status(404).send(`No such thread: ${thread_id}.`);
     res.redirect(`/b/${board}/${thread_id}`);
   })
 
