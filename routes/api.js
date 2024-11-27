@@ -15,7 +15,7 @@ const threadSchema = new mongoose.Schema({
   delete_password: String,
   replies: []
 });
-const modelThread = mongoose.model('threads', threadSchema)
+const modelThread = mongoose.model('Thread', threadSchema)
 
 const replySchema = new mongoose.Schema({
   //_id: { type: ObjectId, default: new ObjectId() },
