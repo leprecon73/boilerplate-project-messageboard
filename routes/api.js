@@ -29,7 +29,9 @@ module.exports = function (app) {
   
   app.route('/api/threads/:board')
 .post(async function(req, res) {
-  /** text and delete_password. The saved database record will have at least the fields _id, text, created_on(date & time), bumped_on(date & time, starts same as created_on), reported (boolean), delete_password, & replies (array).*/
+  /** The saved database record will have at least the fields _id, 
+   * text, created_on(date & time), bumped_on(date & time, starts same as created_on), 
+   * reported (boolean), delete_password, & replies (array).*/
   
   const { text, delete_password } = req.body
   
