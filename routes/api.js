@@ -1,13 +1,4 @@
 'use strict';
-
-
-module.exports = function (app) {
-  
-  app.route('/api/threads/:board');
-    
-  app.route('/api/replies/:board');
-
-};
 require('dotenv').config();
 const URI = process.env.URI;
 let mongoose = require('mongoose');
@@ -33,7 +24,10 @@ const replySchema = new mongoose.Schema({
   reported: { type: Boolean, default: false },
 })
 
-app.route('/api/threads/:board')
+module.exports = function (app) {
+  
+  
+  app.route('/api/threads/:board')
 .post(async function(req, res) {
   /** text and delete_password. The saved database record will have at least the fields _id, text, created_on(date & time), bumped_on(date & time, starts same as created_on), reported (boolean), delete_password, & replies (array).*/
   
@@ -49,3 +43,11 @@ app.route('/api/threads/:board')
 
   res.redirect(`/b/${req.params.board}/`)
 })
+    
+  app.route('/api/replies/:board');
+
+};
+
+
+
+
