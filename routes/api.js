@@ -48,7 +48,7 @@ module.exports = function (app) {
     
   app.route('/api/replies/:board')
   .post(async (req, res) => {
-    const { thread_id, text, delete_password } = req.body;
+    const { thread_id, board, text, delete_password } = req.body;
     
     const newReply = { text, delete_password, created_on: new Date(), reported: false };
 
