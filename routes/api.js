@@ -26,7 +26,7 @@ const threadSchema = new mongoose.Schema({
 });
 
 const replySchema = new mongoose.Schema({
-  _id: { type: ObjectId, default: new ObjectId() },
+  //_id: { type: ObjectId, default: new ObjectId() },
   text: String,
   created_on: { type: Date, default: Date.now },
   delete_password: String,
