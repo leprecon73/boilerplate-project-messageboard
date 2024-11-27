@@ -52,7 +52,7 @@ module.exports = function (app) {
     
     const newReply = { text, delete_password, created_on: new Date(), reported: false };
 
-    const thread = await Thread.findByIdAndUpdate(
+    const thread = await modelThread.findByIdAndUpdate(
       thread_id,
       { $push: { replies: newReply }, $set: { bumped_on: new Date() } },
       { new: true }
