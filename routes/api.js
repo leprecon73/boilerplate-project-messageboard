@@ -17,12 +17,12 @@ const threadSchema = new mongoose.Schema({
 const modelThread = mongoose.model('Thread', threadSchema) 
 
 const replySchema = new mongoose.Schema({
-  //_id: { type: ObjectId, default: new ObjectId() },
   text: String,
   created_on: { type: Date, default: Date.now },
   delete_password: String,
   reported: { type: Boolean, default: false },
 })
+const modelReply = mongoose.model('Reply', replySchema) 
 
 module.exports = function (app) {
   
@@ -46,7 +46,21 @@ module.exports = function (app) {
   res.redirect(`/b/${req.params.board}/`)
 })
     
-  app.route('/api/replies/:board');
+  app.route('/api/replies/:board')
+  .post(async (req, res) => {
+    const { thread_id, text, delete_password } = req.body;
+    
+    const newReply = { text, delete_password, created_on: new Date(), reported: false };
+
+    const thread = await Thread.findByIdAndUpdate(
+      thread_id,
+      { $push: { replies: newReply }, $set: { bumped_on: new Date() } },
+      { new: true }
+    );
+
+    if (!thread) return res.status(404).send('Thread not found');
+    res.redirect(`/b/${board}/${thread_id}`);
+  })
 
 };
 
