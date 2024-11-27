@@ -15,11 +15,37 @@ let mongoose = require('mongoose');
 
 mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
-const schemaReply = new mongoose.Schema({
+const threadSchema = new mongoose.Schema({
+  board: String,
   text: String,
-  created_on: Date,
-  bumped_on: Date,
-  reported: Boolean,
-  delete_password: String
+  created_on: { type: Date, default: Date.now },
+  bumped_on: { type: Date, default: Date.now },
+  reported: { type: Boolean, default: false },
+  delete_password: String,
+  replies: []
+});
+
+const replySchema = new mongoose.Schema({
+  _id: { type: ObjectId, default: new ObjectId() },
+  text: String,
+  created_on: { type: Date, default: Date.now },
+  delete_password: String,
+  reported: { type: Boolean, default: false },
 })
-const modelReply = mongoose.model('repliessss', schemaReply)
+
+app.route('/api/threads/:board')
+.post(async function(req, res) {
+  /** text and delete_password. The saved database record will have at least the fields _id, text, created_on(date & time), bumped_on(date & time, starts same as created_on), reported (boolean), delete_password, & replies (array).*/
+  
+  const { text, delete_password } = req.body
+  
+  const newThread = new modelThread({
+    board: req.params.board,
+    text: text,
+    delete_password: delete_password
+  })
+
+  await newThread.save()
+
+  res.redirect(`/b/${req.params.board}/`)
+})
