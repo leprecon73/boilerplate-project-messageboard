@@ -55,6 +55,7 @@ app.route('/api/threads/:board')
     .limit(10)
     .lean();
 
+
   console.log('threads = ', threads)
 
 })
