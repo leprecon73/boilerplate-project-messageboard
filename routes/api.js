@@ -50,12 +50,12 @@ app.route('/api/threads/:board')
    * will not be sent to the client. */
     const { board } = req.params;
   
-    const threads = await modelThread.find({ board })
+    const threadArr = await modelThread.find({ board })
       .sort({ bumped_on: -1 })
       .limit(10)
       .lean();
 
-      threads.forEach(thread => {
+      threadArr.forEach(thread => {
         delete thread.delete_password;
         delete thread.reported;
 
