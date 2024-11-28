@@ -27,7 +27,7 @@ const modelReply = mongoose.model('Reply', replySchema)
 module.exports = function (app) {
 
 app.route('/api/threads/:board')
-.post(async function(req, res) {
+.post(async (req, res) => {
   /** The saved database record will have at least the fields _id, 
    * text, created_on(date & time), bumped_on(date & time, starts same as created_on), 
    * reported (boolean), delete_password, & replies (array).*/
