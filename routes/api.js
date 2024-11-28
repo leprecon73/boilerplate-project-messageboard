@@ -71,7 +71,7 @@ app.route('/api/threads/:board')
           thread.replycount = thread.replies.length;
       });
     
-    console.log('threads = ', threads.length)
+    console.log('threadArr = ', threadArr.length)
 
     return res.json(threadArr);
   
