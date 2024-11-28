@@ -92,7 +92,20 @@ app.route('/api/threads/:board')
     if (!thread) return res.status(404).send(`No such thread: ${thread_id}.`);
     res.redirect(`/b/${board}/${thread_id}`);
   })
+  .get(async function (req, res){    
 
+    let thread = await modelThread.findById(req.query.thread_id).select({ "reported": 0, "delete_password": 0}).lean().exec();
+
+    thread.replies.sort((e, v) => { v.created_on - e.created_on })
+
+    thread.replies.forEach((reply) => {
+      reply.reported = undefined;
+      reply.delete_password = undefined
+    })
+
+    return res.json(thread) 
+
+  })
 
   
 
