@@ -73,7 +73,7 @@ app.route('/api/threads/:board')
     
     console.log('threads = ', threads.length)
 
-    return res.json(threads);
+    return res.json(threadArr);
   
   })
     
