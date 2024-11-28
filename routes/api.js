@@ -93,6 +93,9 @@ app.route('/api/threads/:board')
     res.redirect(`/b/${board}/${thread_id}`);
   })
 
+
+  
+
 };
 
 
