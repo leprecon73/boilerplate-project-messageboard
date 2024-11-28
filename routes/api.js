@@ -44,21 +44,7 @@ app.route('/api/threads/:board')
 
   res.redirect(`/b/${req.params.board}/`)
 })
-.get(async (req, res) => {
-/**7. You can send a GET request to /api/threads/{board}. Returned will be an array of the most recent 10 bumped 
- * threads on the board with only the most recent 3 replies for each. The reported and delete_password fields 
- * will not be sent to the client. */
-  const { board } = req.params;
 
-  const threads = await modelThread.find({ board })
-    .sort({ bumped_on: -1 })
-    .limit(10)
-    .lean();
-
-
-  console.log('threads = ', threads)
-
-})
     
   app.route('/api/replies/:board')
   .post(async (req, res) => {
