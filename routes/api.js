@@ -54,7 +54,22 @@ app.route('/api/threads/:board')
       .sort({ bumped_on: -1 })
       .limit(10)
       .lean();
-  
+
+      threads.forEach(thread => {
+        delete thread.delete_password;
+        delete thread.reported;
+
+        thread.replies = thread.replies
+          .sort((e, v) => v.created_on - e.created_on)
+          .slice(-3)
+          .map(reply => {
+            delete reply.delete_password;
+            delete reply.reported;
+            return reply;
+          });
+
+          thread.replycount = thread.replies.length;
+      });
     
     console.log('threads = ', threads.length)
 
