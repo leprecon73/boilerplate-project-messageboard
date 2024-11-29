@@ -76,7 +76,23 @@ app.route('/api/threads/:board')
     return res.json(threadArr);
   
   })
- 
+  .delete(async (req, res) => {
+  /**9. You can send a DELETE request to /api/threads/{board} and pass along the thread_id & delete_password to delete the thread. 
+   * Returned will be the string incorrect password or success. */
+    
+    const thread = await modelThread.findById(req.body.thread_id);
+    if (req.body.delete_password === thread.delete_password) {
+      await thread.delete();
+      return res.send("Thread deleted.");
+    } else {
+      return res.send("Wrong password.");
+    }
+  })
+  .put(async (req, res) => {
+    /**11. You can send a PUT request to /api/threads/{board} and pass along the thread_id. Returned will be the string reported. 
+     * The reported value of the thread_id will be changed to true. */
+    
+  })  
 
   app.route('/api/replies/:board')
   .post(async (req, res) => {
