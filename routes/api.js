@@ -140,7 +140,7 @@ app.route('/api/threads/:board')
      * will be the string incorrect password or success. On success, the text of the reply_id will be changed to [deleted]. */
     const { thread_id, delete_password, reply_id } = req.body
 
-    const thread = await threadModel.findOneAndUpdate({ _id: thread_id, 'replies._id': reply_id, 'replies.delete_password': delete_password },
+    const thread = await modelThread.findOneAndUpdate({ _id: thread_id, 'replies._id': reply_id, 'replies.delete_password': delete_password },
           { $set: { 'replies.$.text': '[deleted]' }});
     if (!thread) {
       return res.send('incorrect password');
@@ -153,7 +153,7 @@ app.route('/api/threads/:board')
        * reported. The reported value of the reply_id will be changed to true. */
       const {thread_id, reply_id} = req.body;
 
-      const thread = await threadModel.findOneAndUpdate({ _id: thread_id, 'replies._id': reply_id },
+      const thread = await modelThread.findOneAndUpdate({ _id: thread_id, 'replies._id': reply_id },
         { $set: { 'replies.$.reported': true }});
 
       if (thread) {
