@@ -95,7 +95,11 @@ app.route('/api/threads/:board')
   .put(async (req, res) => {
     /**11. You can send a PUT request to /api/threads/{board} and pass along the thread_id. Returned will be the string reported. 
      * The reported value of the thread_id will be changed to true. */
-    
+    const { thread_id } = req.body
+    const thread = await Message.findById(thread_id);
+    thread.reported = true;
+    await updateThread.save();
+    return res.send("Updated.");
   })  
 
   app.route('/api/replies/:board')
