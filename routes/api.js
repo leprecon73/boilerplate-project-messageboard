@@ -92,14 +92,14 @@ app.route('/api/threads/:board')
       return res.send("incorrect password");
     }
   })
-  .put(async (req, res) => {
+  .put(async (req, res) => { 
     /**11. You can send a PUT request to /api/threads/{board} and pass along the thread_id. Returned will be the string reported. 
      * The reported value of the thread_id will be changed to true. */
     const { thread_id } = req.body
     const thread = await modelThread.findById(thread_id);
     thread.reported = true;
     await thread.save();
-    return res.send("Updated.");
+    return res.send("success"); //incorrect password or success
   })  
 
   app.route('/api/replies/:board')
