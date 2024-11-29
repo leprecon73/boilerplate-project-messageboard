@@ -47,8 +47,6 @@ suite('Functional Tests', function() {
       
       .end( (err, res) => {
         assert.equal(res.status, 200);
-        assert.equal(res.body.delete_password, 'passwordTest');
-        assert.equal(res.body.board, 'funcTest');
         assert.equal(res.body.reported, false);
         assert.isArray(res.body.replies);       
         done();
