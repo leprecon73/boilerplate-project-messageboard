@@ -151,6 +151,14 @@ app.route('/api/threads/:board')
   .put(async (req, res) => {
       /**12. You can send a PUT request to /api/replies/{board} and pass along the thread_id & reply_id. Returned will be the string 
        * reported. The reported value of the reply_id will be changed to true. */
+      const {thread_id, reply_id} = req.body;
+
+      const thread = await threadModel.findOneAndUpdate({ _id: thread_id, 'replies._id': reply_id },
+        { $set: { 'replies.$.reported': true }});
+
+      if (thread) {
+        res.send('reported');
+      }
       
   })  
 
