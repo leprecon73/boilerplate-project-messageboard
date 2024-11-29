@@ -6,7 +6,7 @@ const server = require('../server');
 chai.use(chaiHttp);
 
 suite('Functional Tests', function() {
-    /*async () => {
+    async () => {
         const date = new Date();
         const text = `fcc_test_${date}`;
         const deletePassword = 'delete_me';
@@ -32,7 +32,7 @@ suite('Functional Tests', function() {
         } else {
           throw new Error(`${res.status} ${res.statusText}`);
         }
-      };*/
+      };
 
   /**Creating a new thread: POST request to /api/threads/{board} */
   test("Creating a new thread: POST request to /api/threads/{board}", done => {
