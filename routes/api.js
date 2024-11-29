@@ -79,9 +79,9 @@ app.route('/api/threads/:board')
   .delete(async (req, res) => {
   /**9. You can send a DELETE request to /api/threads/{board} and pass along the thread_id & delete_password to delete the thread. 
    * Returned will be the string incorrect password or success. */
-    
-    const thread = await modelThread.findById(req.body.thread_id);
-    if (req.body.delete_password === thread.delete_password) {
+    const { delete_password, thread_id } = req.body
+    const thread = await modelThread.findById(thread_id);
+    if (delete_password === thread.delete_password) {
       await thread.delete();
       return res.send("Thread deleted.");
     } else {
