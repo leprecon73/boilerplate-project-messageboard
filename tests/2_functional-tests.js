@@ -46,7 +46,7 @@ suite('Functional Tests', function() {
       })
       
       .end(function (err, res) {
-         assert.equal(res.status, 200);
+        assert.equal(res.status, 200);
         assert.equal(res.body.text, 'testText');
         assert.equal(res.body.delete_password, 'passwordTest');
         assert.equal(res.body.board, 'funcTest');
