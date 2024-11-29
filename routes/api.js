@@ -83,7 +83,7 @@ app.route('/api/threads/:board')
     const thread = await modelThread.findById(thread_id);
     console.log('thread = ', thread)
     if (delete_password === thread.delete_password) {
-      await thread.findByIdAndDelete(thread_id);
+      await modelThread.findByIdAndDelete(thread_id);
       return res.send("Thread deleted.");
     } else {
       return res.send("Wrong password.");
