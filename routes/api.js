@@ -98,7 +98,7 @@ app.route('/api/threads/:board')
     const { thread_id } = req.body
     const thread = await modelThread.findById(thread_id);
     thread.reported = true;
-    await updateThread.save();
+    await thread.save();
     return res.send("Updated.");
   })  
 
