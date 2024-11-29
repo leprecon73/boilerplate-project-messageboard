@@ -148,8 +148,9 @@ app.route('/api/threads/:board')
         return res.send("success");
       } else if (e._id == reply_id && e.delete_password != delete_password) {
         return res.send("incorrect password");
-    }
-  }))
+      }
+    })
+  })
   .put(async (req, res) => {
       /**12. You can send a PUT request to /api/replies/{board} and pass along the thread_id & reply_id. Returned will be the string 
        * reported. The reported value of the reply_id will be changed to true. */
