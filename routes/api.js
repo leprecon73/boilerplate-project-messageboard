@@ -85,10 +85,10 @@ app.route('/api/threads/:board')
     
     if (delete_password === thread.delete_password) {
       await modelThread.findByIdAndDelete(thread_id);
-      console.log('success', delete_password, thread.delete_password)
+      //console.log('success', delete_password, thread.delete_password)
       return res.send("success"); 
     } else {
-      console.log('incorrect password', delete_password, thread.delete_password)
+      //console.log('incorrect password', delete_password, thread.delete_password)
       return res.send("incorrect password");
     }
   })
@@ -99,7 +99,7 @@ app.route('/api/threads/:board')
     const thread = await modelThread.findById(thread_id);
     thread.reported = true;
     await thread.save();
-    return res.send("success"); //incorrect password or success
+    return res.send("reported"); 
   })  
 
   app.route('/api/replies/:board')
