@@ -140,16 +140,13 @@ app.route('/api/threads/:board')
      * will be the string incorrect password or success. On success, the text of the reply_id will be changed to [deleted]. */
     const { thread_id, delete_password, reply_id } = req.body
 
-    const thread = await modelThread.findById(thread_id);
-    thread.replies.forEach(async e => {
-      if (e._id == reply_id && e.delete_password == delete_password) {
-        e.text = "[deleted]";
-        await thread.save();
-        return res.send("success");
-      } else if (e._id == reply_id && e.delete_password != delete_password) {
-        return res.send("incorrect password");
-      }
-    })
+    const thread = await threadModel.findOneAndUpdate({ _id: thread_id, 'replies._id': reply_id, 'replies.delete_password': delete_password },
+          { $set: { 'replies.$.text': '[deleted]' }});
+    if (!thread) {
+      return res.send('incorrect password');
+    }
+    res.send('success');
+
   })
   .put(async (req, res) => {
       /**12. You can send a PUT request to /api/replies/{board} and pass along the thread_id & reply_id. Returned will be the string 
