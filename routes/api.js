@@ -71,14 +71,34 @@ app.route('/api/threads/:board')
           thread.replycount = thread.replies.length;
       });
     
-    console.log('threadArr = ', threadArr.length)
+    //console.log('threadArr = ', threadArr.length)
 
     return res.json(threadArr);
   
   })
+  .delete(async (req, res) => {
+  /**9. You can send a DELETE request to /api/threads/{board} and pass along the thread_id & delete_password to delete the thread. 
+   * Returned will be the string incorrect password or success. */
     
+    const thread = await Message.findById(req.body.thread_id);
+    if (req.body.delete_password === thread.delete_password) {
+      await thread.delete();
+      return res.send("Thread deleted.");
+    } else {
+      return res.send("Wrong password.");
+    }
+  })
+  .put(async (req, res) => {
+    /**11. You can send a PUT request to /api/threads/{board} and pass along the thread_id. Returned will be the string reported. 
+     * The reported value of the thread_id will be changed to true. */
+    
+  })  
+
   app.route('/api/replies/:board')
   .post(async (req, res) => {
+    /**6. You can send a POST request to /api/replies/{board} with form data including text, delete_password, & thread_id. 
+     * This will update the bumped_on date to the comment's date. In the thread's replies array, an object will be saved with at 
+     * least the properties _id, text, created_on, delete_password, & reported. */
     const { thread_id, board, text, delete_password } = req.body;
     
     const newReply = { text, delete_password, created_on: new Date(), reported: false };
@@ -93,7 +113,8 @@ app.route('/api/threads/:board')
     res.redirect(`/b/${board}/${thread_id}`);
   })
   .get(async function (req, res){    
-
+    /**8. You can send a GET request to /api/replies/{board}?thread_id={thread_id}. Returned will be the entire thread with 
+     * all its replies, also excluding the same fields from the client as the previous test. */
     let thread = await modelThread.findById(req.query.thread_id).select({ "reported": 0, "delete_password": 0}).lean().exec();
 
     thread.replies.sort((e, v) => { v.created_on - e.created_on })
@@ -106,6 +127,16 @@ app.route('/api/threads/:board')
     return res.json(thread) 
 
   })
+  .delete(async (req, res) => {
+    /**10. You can send a DELETE request to /api/replies/{board} and pass along the thread_id, reply_id, & delete_password. Returned 
+     * will be the string incorrect password or success. On success, the text of the reply_id will be changed to [deleted]. */
+  
+    })
+  .put(async (req, res) => {
+      /**12. You can send a PUT request to /api/replies/{board} and pass along the thread_id & reply_id. Returned will be the string 
+       * reported. The reported value of the reply_id will be changed to true. */
+      
+  })  
 
   
 
