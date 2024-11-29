@@ -16,14 +16,6 @@ const threadSchema = new mongoose.Schema({
 });
 const modelThread = mongoose.model('Thread', threadSchema) 
 
-const replySchema = new mongoose.Schema({
-  text: String,
-  created_on: { type: Date, default: Date.now },
-  delete_password: String,
-  reported: { type: Boolean, default: false },
-})
-const modelReply = mongoose.model('Reply', replySchema) 
-
 module.exports = function (app) {
 
 app.route('/api/threads/:board')
