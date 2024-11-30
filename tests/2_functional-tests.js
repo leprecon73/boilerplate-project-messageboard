@@ -124,7 +124,7 @@ chai
 .request(server)
 .post("/api/threads/funcTest")
 .send({
-  board: "funcTest",
+  board: "funcTestRepl",
   text:  "testText",
   delete_password: "passwordTest"
 })
@@ -132,7 +132,7 @@ chai
 test('6.Creating a new reply: POST request to /api/replies/{board}', (done) => {
   chai
         .request(server)
-        .post("/api/replies/funcTest")
+        .post("/api/replies/funcTestRepl")
         .send({
           thread_id: threadId,
           text: "testTextReply",
