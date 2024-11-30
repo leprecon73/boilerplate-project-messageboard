@@ -64,7 +64,7 @@ test('2.Viewing the 10 most recent threads with 3 replies each: GET request to /
       assert.equal(res.body.length, 10);
 
       res.body.forEach(e => {
-        assert.isBelow(e.replies.length, 3);
+        assert.isBelow(e.replies.length, 4);
       });
       //console.log(res.body[0])
       //assert.isBelow(res.body[0].replies.length, 4);
