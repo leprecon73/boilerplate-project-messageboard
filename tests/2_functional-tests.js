@@ -33,7 +33,7 @@ suite('Functional Tests', function() {
           throw new Error(`${res.status} ${res.statusText}`);
         }
       };*/
-
+  let threadId;
   /**Creating a new thread: POST request to /api/threads/{board} */
   test("1.Creating a new thread: POST request to /api/threads/{board}", (done) => {
     chai
@@ -62,24 +62,17 @@ test('2.Viewing the 10 most recent threads with 3 replies each: GET request to /
       assert.equal(res.status, 200);
       assert.isArray(res.body);
       assert.equal(res.body.length, 10);
-
+      threadId = res.body[0]._id;
       res.body.forEach(e => {
         assert.isBelow(e.replies.length, 4);
       });
       done();
     });
 });
-let threadId;
+
 /* Deleting a thread with the incorrect password: DELETE request to /api/threads/{board} with an invalid delete_password*/
 test('3.Deleting a thread with the incorrect password: DELETE request to /api/threads/{board} with an invalid delete_password', (done) => {
   chai
-    .request(server)
-    .get("/api/threads/funcTest")
-    .query({})
-    .end(function (err, res) {
-      threadId = res.body[0]._id;
-      done();
-    })
     .request(server)
     .delete('/api/threads/funcTest')
     .send({ thread_id: threadId, delete_password: 'incorrectPassword' })
