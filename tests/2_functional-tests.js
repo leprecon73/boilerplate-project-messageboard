@@ -111,7 +111,7 @@ test('5.Reporting a thread: PUT request to /api/threads/{board}', (done) => {
       .request(server)
       .put('/api/threads/:board')
       .send({
-        board: funcTest,
+        board: "funcTest",
         thread_id: threadId
       })
       .end(function (err, res) {
