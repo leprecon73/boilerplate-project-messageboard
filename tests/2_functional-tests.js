@@ -69,9 +69,16 @@ test('2.Viewing the 10 most recent threads with 3 replies each: GET request to /
       done();
     });
 });
+let threadId;
 /* Deleting a thread with the incorrect password: DELETE request to /api/threads/{board} with an invalid delete_password*/
 test('3.Deleting a thread with the incorrect password: DELETE request to /api/threads/{board} with an invalid delete_password', (done) => {
-  chai.request(server)
+  chai
+    .request(server)
+    .get("/api/threads/funcTest")
+    .end(function (err, res) {
+      threadId = res.body[0]._id;
+      done();
+    })
     .delete('/api/threads/funcTest')
     .send({ thread_id: threadId, delete_password: 'incorrectPassword' })
     .end(function (err, res) {
