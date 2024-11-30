@@ -45,14 +45,29 @@ suite('Functional Tests', function() {
         delete_password: "passwordTest"
       })
       
-      .end( function (err, res)  {
+      .end( (err, res) => {
         assert.equal(res.status, 200);
         done();
       });
 
-    //done();
+    
   });
-/*  Viewing the 10 most recent threads with 3 replies each: GET request to /api/threads/{board}
+/*  Viewing the 10 most recent threads with 3 replies each: GET request to /api/threads/{board} */
+test('2.Viewing the 10 most recent threads with 3 replies each: GET request to /api/threads/{board}', (done) => {
+  chai
+    .request(server)
+    .get('/api/threads/test1')
+    .query({})
+    .end( (err, res) => {
+      assert.equal(res.status, 200);
+      assert.isArray(res.body);
+      assert.equal(res.body.length, 10);
+      assert.isBelow(res.body[0].replies.length, 4);
+
+      done();
+    });
+});
+/*
 Deleting a thread with the incorrect password: DELETE request to /api/threads/{board} with an invalid delete_password
 Deleting a thread with the correct password: DELETE request to /api/threads/{board} with a valid delete_password
 Reporting a thread: PUT request to /api/threads/{board}
