@@ -118,7 +118,7 @@ app.route('/api/threads/:board')
   .get(async function (req, res){    
     /**8. You can send a GET request to /api/replies/{board}?thread_id={thread_id}. Returned will be the entire thread with 
      * all its replies, also excluding the same fields from the client as the previous test. */
-    let thread = await modelThread.findById(req.query.thread_id)//.select({ "reported": 0, "delete_password": 0}).lean().exec();
+    let thread = await modelThread.findById(req.query.thread_id).select({ "reported": 0, "delete_password": 0}).lean()//.exec();
 
     if (!thread) {
       res.status(404).send('No such thread');  
