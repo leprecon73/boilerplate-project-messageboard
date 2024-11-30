@@ -79,6 +79,7 @@ test('3.Deleting a thread with the incorrect password: DELETE request to /api/th
       threadId = res.body[0]._id;
       done();
     })
+    .request(server)
     .delete('/api/threads/funcTest')
     .send({ thread_id: threadId, delete_password: 'incorrectPassword' })
     .end(function (err, res) {
