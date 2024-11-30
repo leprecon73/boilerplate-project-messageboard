@@ -120,12 +120,12 @@ app.route('/api/threads/:board')
      * all its replies, also excluding the same fields from the client as the previous test. */
     let thread = await modelThread.findById(req.query.thread_id).select({ "reported": 0, "delete_password": 0}).lean().exec();
 
-    /*thread.replies.sort((e, v) => { v.created_on - e.created_on })
+    //thread.replies.sort((e, v) => { v.created_on - e.created_on })
 
     thread.replies.forEach((reply) => {
       reply.reported = undefined;
       reply.delete_password = undefined
-    })*/
+    })
 
     return res.json(thread) 
 
