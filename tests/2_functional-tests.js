@@ -38,8 +38,8 @@ suite('Functional Tests', function() {
   test("1.Creating a new thread: POST request to /api/threads/{board}", done => {
     chai
       .request(server)
-    /*  .post("/api/threads/funcTest")
-      .send({
+      .post("/api/threads/funcTest")
+    /*  .send({
         board: "funcTest",
         text:  "testText",
         delete_password: "passwordTest"
