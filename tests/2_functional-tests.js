@@ -120,6 +120,14 @@ test('5.Reporting a thread: PUT request to /api/threads/{board}', (done) => {
 
       
 });
+chai
+.request(server)
+.post("/api/threads/funcTest")
+.send({
+  board: "funcTest",
+  text:  "testText",
+  delete_password: "passwordTest"
+})
 /*Creating a new reply: POST request to /api/replies/{board}*/
 test('6.Creating a new reply: POST request to /api/replies/{board}', (done) => {
   chai
