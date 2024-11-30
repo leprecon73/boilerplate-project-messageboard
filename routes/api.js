@@ -108,7 +108,7 @@ app.route('/api/threads/:board')
 
     const thread = await modelThread.findByIdAndUpdate(
       thread_id,
-      { $push: { replies: { _id: new ObjectId(), text, delete_password, created_on: new Date(), reported: false } }, $set: { bumped_on: new Date() } },
+      { $push: { replies: newReply }, $set: { bumped_on: new Date() } },
       { new: true }
     );
 
@@ -120,7 +120,7 @@ app.route('/api/threads/:board')
      * all its replies, also excluding the same fields from the client as the previous test. */
     let thread = await modelThread.findById(req.query.thread_id).select({ "reported": 0, "delete_password": 0}).lean().exec();
 
-    //thread.replies.sort((e, v) => { v.created_on - e.created_on })
+    ///thread.replies.sort((e, v) => { v.created_on - e.created_on })
 
     thread.replies.forEach((reply) => {
       reply.reported = undefined;
