@@ -35,7 +35,7 @@ suite('Functional Tests', function() {
       };*/
 
   /**Creating a new thread: POST request to /api/threads/{board} */
-  test("1.Creating a new thread: POST request to /api/threads/{board}", done => {
+  test("1.Creating a new thread: POST request to /api/threads/{board}", (done) => {
     chai
       .request(server)
       .post("/api/threads/funcTest")
@@ -47,7 +47,7 @@ suite('Functional Tests', function() {
       
       .end( function (err, res)  {
         assert.equal(res.status, 200);
-        //done();
+        done();
       });
 
     //done();
