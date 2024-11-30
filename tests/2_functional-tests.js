@@ -109,9 +109,8 @@ test('4.Deleting a thread with the correct password: DELETE request to /api/thre
 test('5.Reporting a thread: PUT request to /api/threads/{board}', (done) => {
   chai
       .request(server)
-      .put('/api/threads/:board')
+      .put('/api/threads/funcTest')
       .send({
-        board: "funcTest",
         thread_id: threadId
       })
       .end(function (err, res) {
