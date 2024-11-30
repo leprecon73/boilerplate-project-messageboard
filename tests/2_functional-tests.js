@@ -76,7 +76,6 @@ chai
   .query({})
   .end( (err, res) => {
     threadId = res.body[0]._id;
-    done();
   });
 console.log("threadId =", threadId)
 /* Deleting a thread with the incorrect password: DELETE request to /api/threads/{board} with an invalid delete_password*/
