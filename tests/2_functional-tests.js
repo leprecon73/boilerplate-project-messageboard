@@ -122,7 +122,7 @@ test('5.Reporting a thread: PUT request to /api/threads/{board}', (done) => {
 });
 chai
 .request(server)
-.post("/api/threads/funcTest")
+.post("/api/threads/funcTestRepl")
 .send({
   board: "funcTestRepl",
   text:  "testText",
