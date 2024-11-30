@@ -62,7 +62,7 @@ test('2.Viewing the 10 most recent threads with 3 replies each: GET request to /
       assert.equal(res.status, 200);
       assert.isArray(res.body);
       assert.equal(res.body.length, 10);
-      threadId = res.body[0]._id;
+      //threadId = res.body[0]._id;
       res.body.forEach(e => {
         assert.isBelow(e.replies.length, 4);
       });
@@ -72,6 +72,15 @@ test('2.Viewing the 10 most recent threads with 3 replies each: GET request to /
 
 /* Deleting a thread with the incorrect password: DELETE request to /api/threads/{board} with an invalid delete_password*/
 test('3.Deleting a thread with the incorrect password: DELETE request to /api/threads/{board} with an invalid delete_password', (done) => {
+  chai
+  .request(server)
+  .get('/api/threads/funcTest')
+  .query({})
+  .end( (err, res) => {
+    threadId = res.body[0]._id;
+    done();
+  });
+
   chai
     .request(server)
     .delete('/api/threads/funcTest')
