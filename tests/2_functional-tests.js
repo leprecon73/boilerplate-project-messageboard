@@ -85,8 +85,15 @@ test('3.Deleting a thread with the incorrect password: DELETE request to /api/th
 });
 
 /*Deleting a thread with the correct password: DELETE request to /api/threads/{board} with a valid delete_password */
-test('4.Deleting a thread with the incorrect password: DELETE request to /api/threads/{board} with an valid delete_password', (done) => {
-
+test('4.Deleting a thread with the correct password: DELETE request to /api/threads/{board} with an valid delete_password', (done) => {
+  chai.request(server)
+  .delete('/api/threads/funcTest')
+  .send({ thread_id: threadId, delete_password: 'passwordTest' })
+  .end(function (err, res) {
+    assert.equal(res.status, 200);
+    assert.equal(res.text, 'success');
+    done();
+  });
 
 });
 /*
