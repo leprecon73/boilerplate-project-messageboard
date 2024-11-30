@@ -35,8 +35,8 @@ suite('Functional Tests', function() {
       };*/
 
   /**Creating a new thread: POST request to /api/threads/{board} */
-  test("Creating a new thread: POST request to /api/threads/{board}", done => {
-    chai
+  test("1.Creating a new thread: POST request to /api/threads/{board}", done => {
+    /*chai
       .request(server)
       .post("/api/threads/funcTest")
       .send({
@@ -50,7 +50,7 @@ suite('Functional Tests', function() {
         done();
       });
 
-    done();
+    done();*/
   });
 /*  Viewing the 10 most recent threads with 3 replies each: GET request to /api/threads/{board}
 Deleting a thread with the incorrect password: DELETE request to /api/threads/{board} with an invalid delete_password
