@@ -56,7 +56,7 @@ suite('Functional Tests', function() {
 test('2.Viewing the 10 most recent threads with 3 replies each: GET request to /api/threads/{board}', (done) => {
   chai
     .request(server)
-    .get('/api/threads/test1')
+    .get('/api/threads/general')
     .query({})
     .end( (err, res) => {
       assert.equal(res.status, 200);
