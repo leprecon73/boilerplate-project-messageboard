@@ -89,7 +89,7 @@ app.route('/api/threads/:board')
      * The reported value of the thread_id will be changed to true. */
     const { thread_id } = req.body
     const thread = await modelThread.findById(thread_id);
-    if (thread) {
+    if (thread.reported?) {
       thread.reported = true;
       await thread.save();
       return res.send("reported"); 
