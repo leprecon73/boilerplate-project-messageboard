@@ -126,7 +126,9 @@ chai
 .send({
   board: "funcTestRepl",
   text:  "testText",
-  delete_password: "passwordTest"
+  delete_password: "passwordTest",
+  replies: [{{ $push: { replies: newReply }, $set: { bumped_on: new Date() } },
+    { new: true }}]
 })
 /*Creating a new reply: POST request to /api/replies/{board}*/
 test('6.Creating a new reply: POST request to /api/replies/{board}', (done) => {

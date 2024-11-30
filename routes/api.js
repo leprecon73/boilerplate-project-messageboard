@@ -108,7 +108,7 @@ app.route('/api/threads/:board')
 
     const thread = await modelThread.findByIdAndUpdate(
       thread_id,
-      { $push: { replies: newReply }, $set: { bumped_on: new Date() } },
+      { $push: { replies: { _id: new ObjectId(), text, delete_password, created_on: new Date(), reported: false } }, $set: { bumped_on: new Date() } },
       { new: true }
     );
 
