@@ -66,15 +66,23 @@ test('2.Viewing the 10 most recent threads with 3 replies each: GET request to /
       res.body.forEach(e => {
         assert.isBelow(e.replies.length, 4);
       });
-      //console.log(res.body[0])
-      //assert.isBelow(res.body[0].replies.length, 4);
-
       done();
     });
 });
-/*
-Deleting a thread with the incorrect password: DELETE request to /api/threads/{board} with an invalid delete_password
-Deleting a thread with the correct password: DELETE request to /api/threads/{board} with a valid delete_password
+/* Deleting a thread with the incorrect password: DELETE request to /api/threads/{board} with an invalid delete_password*/
+test('3.Deleting a thread with the incorrect password: DELETE request to /api/threads/{board} with an invalid delete_password', (done) => {
+  chai.request(server)
+    .delete('/api/threads/funcTest')
+    .send({ thread_id: threadId, delete_password: 'incorrectPassword' })
+    .end(function (err, res) {
+      assert.equal(res.status, 200);
+      assert.equal(res.text, 'incorrect password');
+      done();
+    });
+
+});
+
+/*Deleting a thread with the correct password: DELETE request to /api/threads/{board} with a valid delete_password
 Reporting a thread: PUT request to /api/threads/{board}
 Creating a new reply: POST request to /api/replies/{board}
 Viewing a single thread with all replies: GET request to /api/replies/{board}
