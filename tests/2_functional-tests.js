@@ -39,12 +39,12 @@ suite('Functional Tests', function() {
     chai
       .request(server)
       .post("/api/threads/funcTest")
-    /*  .send({
+      .send({
         board: "funcTest",
         text:  "testText",
         delete_password: "passwordTest"
       })
-      
+    /*  
       .end( (err, res) => {
         assert.equal(res.status, 200);
         done();
