@@ -36,9 +36,9 @@ suite('Functional Tests', function() {
 
   /**Creating a new thread: POST request to /api/threads/{board} */
   test("1.Creating a new thread: POST request to /api/threads/{board}", done => {
-    /*chai
+    chai
       .request(server)
-      .post("/api/threads/funcTest")
+    /*  .post("/api/threads/funcTest")
       .send({
         board: "funcTest",
         text:  "testText",
