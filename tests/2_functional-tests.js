@@ -77,10 +77,9 @@ chai
   .end( (err, res) => {
     threadId = res.body[0]._id;
   });
-console.log("threadId =", threadId)
+
 /* Deleting a thread with the incorrect password: DELETE request to /api/threads/{board} with an invalid delete_password*/
 test('3.Deleting a thread with the incorrect password: DELETE request to /api/threads/{board} with an invalid delete_password', (done) => {
-  
 
   chai
     .request(server)
@@ -106,8 +105,23 @@ test('4.Deleting a thread with the correct password: DELETE request to /api/thre
   });
 
 });
+/*Reporting a thread: PUT request to /api/threads/{board} */
+test('5.Reporting a thread: PUT request to /api/threads/{board}', (done) => {
+  chai
+      .request(server)
+      .put('/api/threads/:board')
+      .send({
+        board: funcTest,
+        thread_id: threadId
+      })
+      .end(function (err, res) {
+        assert.equal(res.status, 200);
+        assert.equal(res.body, 'success');
+        done();
+      });
+
+});
 /*
-Reporting a thread: PUT request to /api/threads/{board}
 Creating a new reply: POST request to /api/replies/{board}
 Viewing a single thread with all replies: GET request to /api/replies/{board}
 Deleting a reply with the incorrect password: DELETE request to /api/replies/{board} with an invalid delete_password
