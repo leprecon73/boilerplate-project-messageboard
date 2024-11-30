@@ -44,12 +44,12 @@ suite('Functional Tests', function() {
         text:  "testText",
         delete_password: "passwordTest"
       })
-    /*  
+      
       .end( (err, res) => {
         assert.equal(res.status, 200);
         done();
       });
-*/
+
     done();
   });
 /*  Viewing the 10 most recent threads with 3 replies each: GET request to /api/threads/{board}
