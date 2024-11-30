@@ -84,7 +84,12 @@ test('3.Deleting a thread with the incorrect password: DELETE request to /api/th
 
 });
 
-/*Deleting a thread with the correct password: DELETE request to /api/threads/{board} with a valid delete_password
+/*Deleting a thread with the correct password: DELETE request to /api/threads/{board} with a valid delete_password */
+test('4.Deleting a thread with the incorrect password: DELETE request to /api/threads/{board} with an valid delete_password', (done) => {
+
+
+});
+/*
 Reporting a thread: PUT request to /api/threads/{board}
 Creating a new reply: POST request to /api/replies/{board}
 Viewing a single thread with all replies: GET request to /api/replies/{board}
