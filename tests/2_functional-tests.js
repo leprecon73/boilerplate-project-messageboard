@@ -46,11 +46,11 @@ suite('Functional Tests', function() {
       })
       
       .end( function (err, res)  {
-        //assert.equal(res.status, 200);
+        assert.equal(res.status, 200);
         done();
       });
 
-    done();
+    //done();
   });
 /*  Viewing the 10 most recent threads with 3 replies each: GET request to /api/threads/{board}
 Deleting a thread with the incorrect password: DELETE request to /api/threads/{board} with an invalid delete_password
