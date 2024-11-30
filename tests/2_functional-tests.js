@@ -34,6 +34,7 @@ suite('Functional Tests', function() {
         }
       };*/
   let threadId;
+  let newReply = { _id: new ObjectId(), text, delete_password, created_on: new Date(), reported: false }
   /**Creating a new thread: POST request to /api/threads/{board} */
   test("1.Creating a new thread: POST request to /api/threads/{board}", (done) => {
     chai
