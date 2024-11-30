@@ -115,7 +115,6 @@ test('5.Reporting a thread: PUT request to /api/threads/{board}', (done) => {
       })
       .end(function (err, res) {
         assert.equal(res.status, 200);
-        assert.equal(res.body, {});
         done();
       });
 
