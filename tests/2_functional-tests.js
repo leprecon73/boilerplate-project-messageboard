@@ -119,13 +119,37 @@ test('5.Reporting a thread: PUT request to /api/threads/{board}', (done) => {
       });
 
       
-
 });
-/*
-Creating a new reply: POST request to /api/replies/{board}
-Viewing a single thread with all replies: GET request to /api/replies/{board}
-Deleting a reply with the incorrect password: DELETE request to /api/replies/{board} with an invalid delete_password
-Deleting a reply with the correct password: DELETE request to /api/replies/{board} with a valid delete_password
-Reporting a reply: PUT request to /api/replies/{board} */
+/*Creating a new reply: POST request to /api/replies/{board}*/
+test('6.Creating a new reply: POST request to /api/replies/{board}', (done) => {
+  chai
+        .request(server)
+        .post("/api/replies/funcTest")
+        .send({
+          thread_id: threadId,
+          text: "testTextReply",
+          delete_password: "reply password"
+        })
+        .end((err, res) => {
+          assert.equal(res.status, 200);
 
+          done();
+        });
+});
+/*Viewing a single thread with all replies: GET request to /api/replies/{board}
+test('7.Viewing a single thread with all replies: GET request to /api/replies/{board}', (done) => {
+  
+});*/
+/*Deleting a reply with the incorrect password: DELETE request to /api/replies/{board} with an invalid delete_password
+test('8.Deleting a reply with the incorrect password: DELETE request to /api/replies/{board} with an invalid delete_password', (done) => {
+  
+});*/
+/*Deleting a reply with the correct password: DELETE request to /api/replies/{board} with a valid delete_password
+test('9.Deleting a reply with the correct password: DELETE request to /api/replies/{board} with a valid delete_password', (done) => {
+  
+});*/
+/*Reporting a reply: PUT request to /api/replies/{board} 
+test('10.Reporting a reply: PUT request to /api/replies/{board}', (done) => {
+  
+});*/
 });
