@@ -102,7 +102,7 @@ app.route('/api/threads/:board')
     /**6. You can send a POST request to /api/replies/{board} with form data including text, delete_password, & thread_id. 
      * This will update the bumped_on date to the comment's date. In the thread's replies array, an object will be saved with at 
      * least the properties _id, text, created_on, delete_password, & reported. */
-    const { thread_id, board, text, delete_password } = req.body;
+    const { thread_id, text, delete_password } = req.body;
     
     const newReply = { text, delete_password, created_on: new Date(), reported: false };
     console.log(thread_id, board, text, delete_password, newReply);
