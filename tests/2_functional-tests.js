@@ -139,6 +139,7 @@ test('6.Creating a new reply: POST request to /api/replies/{board}', (done) => {
         .request(server)
         .post("/api/replies/funcTest")
         .send({
+          board: 'funcTest',
           thread_id: threadId,
           text: "testTextReply",
           delete_password: "reply password"
