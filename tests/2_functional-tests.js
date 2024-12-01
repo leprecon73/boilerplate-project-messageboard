@@ -163,7 +163,8 @@ test('6.Creating a new reply: POST request to /api/replies/{board}', (done) => {
 test('7.Viewing a single thread with all replies: GET request to /api/replies/{board}', (done) => {
   
   chai.request(server)
-        .get(`/api/replies/funcTest?thread_id=${threadId}`)
+        //.get(`/api/replies/funcTest?thread_id=${threadId}`)
+        .get('/api/replies/funcTest')
         .query({ thread_id: threadId })
         .end(function (err, res) {
           assert.equal(res.status, 200);
