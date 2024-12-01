@@ -111,8 +111,9 @@ app.route('/api/threads/:board')
       { $push: { replies: newReply }, $set: { bumped_on: new Date() } },
       { new: true }
     ); 
-
-    if (!thread) return res.status(404).send(`No such thread: ${thread_id}.`);
+    console.log("thread =", thread);
+    if (!thread) 
+      return res.status(404).send(`No such thread: ${thread_id}.`);
     res.redirect(`/b/${board}/${thread_id}`);
   })
   .get(async function (req, res){    
