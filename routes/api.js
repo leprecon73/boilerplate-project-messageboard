@@ -133,7 +133,7 @@ app.route('/api/threads/:board')
       reply.reported = undefined;
       reply.delete_password = undefined
     })
-
+    console.log("thread ",thread);
     return res.json(thread) 
 
   })
