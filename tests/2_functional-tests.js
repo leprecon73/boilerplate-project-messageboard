@@ -152,12 +152,13 @@ test('6.Creating a new reply: POST request to /api/replies/{board}', (done) => {
 });
 /*Viewing a single thread with all replies: GET request to /api/replies/{board}*/
 test('7.Viewing a single thread with all replies: GET request to /api/replies/{board}', (done) => {
+  console.log("/api/replies/funcTest?thread_id=${threadId} ", `/api/replies/funcTest?thread_id=${threadId}`);
   chai.request(server)
         .get(`/api/replies/funcTest?thread_id=${threadId}`) ///api/replies/funcTest?thread_id=674c4793f4644a22343438fd
         .query({ thread_id: threadId })
         .end(function (err, res) {
           assert.equal(res.status, 200);
-          console.log("/api/replies/funcTest?thread_id=${threadId} ", `/api/replies/funcTest?thread_id=${threadId}`);
+          
           /*console.log("res.body =",res.body);*/
           /*assert.isArray(res.body.replies);
           assert.property(res.body.replies[0], '_id');
