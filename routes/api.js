@@ -112,7 +112,7 @@ app.route('/api/threads/:board')
       { $push: { replies: newReply }, $set: { bumped_on: new Date() } },
       { new: true }
     ); 
-    //console.log("APIthread =", thread);
+    console.log("APIthread =", thread);
     if (!thread) 
       return res.status(404).send(`No such thread: ${thread_id}.`);
     res.redirect(`/b/${board}/${thread_id}`);
@@ -147,7 +147,8 @@ app.route('/api/threads/:board')
     /*const thread = await modelThread.findOneAndUpdate({ _id: thread_id, 'replies._id': reply_id, 'replies.delete_password': delete_password },
           { $set: { 'replies.$.text': '[deleted]' }});*/
     const thread = await modelThread.findById(req.body.thread_id);
-    console.log("APIthread =", thread, "req.body.thread_id =",req.body.thread_id);
+    //console.log("APIthread =", thread, "req.body.thread_id =",req.body.thread_id);
+    
     if (!thread) {
       return res.send('incorrect password');
     }
