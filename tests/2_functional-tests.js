@@ -125,9 +125,9 @@ test('5.Reporting a thread: PUT request to /api/threads/{board}', (done) => {
 });
 /*chai
 .request(server)
-.post("/api/threads/funcTestRepl")
+.post("/api/threads/funcTest")
 .send({
-  board: "funcTestRepl",
+  board: "funcTest",
   text:  "testText",
   delete_password: "passwordTest",
   replies: [{ $push: { replies: newReply }, $set: { bumped_on: new Date() } },
@@ -137,7 +137,7 @@ test('5.Reporting a thread: PUT request to /api/threads/{board}', (done) => {
 test('6.Creating a new reply: POST request to /api/replies/{board}', (done) => {
   chai
         .request(server)
-        .post("/api/replies/funcTestRepl")
+        .post("/api/replies/funcTest")
         .send({
           thread_id: threadId,
           text: "testTextReply",
