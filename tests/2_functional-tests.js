@@ -152,7 +152,7 @@ test('6.Creating a new reply: POST request to /api/replies/{board}', (done) => {
 });
 /*Viewing a single thread with all replies: GET request to /api/replies/{board}*/
 test('7.Viewing a single thread with all replies: GET request to /api/replies/{board}', (done) => {
-  /*chai.request(server)
+  chai.request(server)
         .get('/api/replies/funcTest')
         .query({ thread_id: threadId })
         .end(function (err, res) {
@@ -162,7 +162,7 @@ test('7.Viewing a single thread with all replies: GET request to /api/replies/{b
           assert.property(res.body.replies[0], 'text');
           replyId = res.body.replies[0]._id;
           done();
-        });*/
+        });
 });
 /*Deleting a reply with the incorrect password: DELETE request to /api/replies/{board} with an invalid delete_password
 test('8.Deleting a reply with the incorrect password: DELETE request to /api/replies/{board} with an invalid delete_password', (done) => {
