@@ -78,7 +78,7 @@ chai
   .query({})
   .end( (err, res) => {
     threadId = res.body[0]._id;
-    //console.log("threadId =",threadId);
+    console.log("threadId =",threadId);
   });
 
 /* Deleting a thread with the incorrect password: DELETE request to /api/threads/{board} with an invalid delete_password*/
@@ -145,8 +145,9 @@ test('6.Creating a new reply: POST request to /api/replies/{board}', (done) => {
           delete_password: "reply password"
         })
         .end((err, res) => {
-          assert.equal(res.status, 200);
           console.log("threadId =",threadId);
+          assert.equal(res.status, 200);
+          
           done();
         });
 });
