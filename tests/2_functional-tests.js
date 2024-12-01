@@ -170,6 +170,7 @@ test('7.Viewing a single thread with all replies: GET request to /api/replies/{b
           assert.isArray(res.body.replies);
           assert.property(res.body.replies[0], 'text');
           console.log("res.body.replies =", res.body.replies);
+          console.log("res.body.replies[0]._id =", res.body.replies[0]._id);
           /*replyId = res.body.replies[0]._id;*/
           done();
         });
