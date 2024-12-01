@@ -141,7 +141,7 @@ test('6.Creating a new reply: POST request to /api/replies/{board}', (done) => {
         .send({
           thread_id: threadId,
           text: "testTextReply",
-          delete_password: "reply password"
+          delete_password: "passwordTest"
         })
         .end((err, res) => {
           //console.log("threadId =",threadId);
