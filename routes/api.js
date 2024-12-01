@@ -135,7 +135,7 @@ app.route('/api/threads/:board')
       reply.reported = undefined;
       reply.delete_password = undefined
     })
-    console.log("APIthread =", thread);
+    //console.log("APIthread =", thread);
     return res.json(thread) 
 
   })
@@ -144,8 +144,10 @@ app.route('/api/threads/:board')
      * will be the string incorrect password or success. On success, the text of the reply_id will be changed to [deleted]. */
     const { thread_id, delete_password, reply_id } = req.body
 
-    const thread = await modelThread.findOneAndUpdate({ _id: thread_id, 'replies._id': reply_id, 'replies.delete_password': delete_password },
-          { $set: { 'replies.$.text': '[deleted]' }});
+    /*const thread = await modelThread.findOneAndUpdate({ _id: thread_id, 'replies._id': reply_id, 'replies.delete_password': delete_password },
+          { $set: { 'replies.$.text': '[deleted]' }});*/
+    const thread = await modelThread.findById(req.body.thread_id);
+    console.log("APIthread =", thread);
     if (!thread) {
       return res.send('incorrect password');
     }
