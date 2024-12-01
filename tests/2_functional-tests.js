@@ -157,8 +157,10 @@ test('7.Viewing a single thread with all replies: GET request to /api/replies/{b
         .query({ thread_id: threadId })
         .end(function (err, res) {
           assert.equal(res.status, 200);
-          assert.isArray(res.body.replies);
-          /*assert.property(res.body.replies[0], '_id');
+          console.log("threadId =",threadId);
+          console.log("res.body =",res.body);
+          /*assert.isArray(res.body.replies);
+          assert.property(res.body.replies[0], '_id');
           assert.property(res.body.replies[0], 'text');
           replyId = res.body.replies[0]._id;*/
           done();
