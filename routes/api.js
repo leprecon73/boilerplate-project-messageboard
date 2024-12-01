@@ -105,7 +105,7 @@ app.route('/api/threads/:board')
     const { thread_id, board, text, delete_password } = req.body;
     
     const newReply = { text, delete_password, created_on: new Date(), reported: false };
-
+    console.log(thread_id, board, text, delete_password, newReply);
     const thread = await modelThread.findByIdAndUpdate(
       thread_id,
       { $push: { replies: newReply }, $set: { bumped_on: new Date() } },
