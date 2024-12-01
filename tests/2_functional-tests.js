@@ -144,7 +144,8 @@ test('6.Creating a new reply: POST request to /api/replies/{board}', (done) => {
           delete_password: "passwordTest"
         })
         .end((err, res) => {
-          //console.log("threadId =",threadId);
+          threadId = res.body[0]._id;
+          console.log("threadId =", threadId);
           assert.equal(res.status, 200);
           
           done();
