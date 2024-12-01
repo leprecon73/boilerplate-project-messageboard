@@ -150,7 +150,7 @@ test('6.Creating a new reply: POST request to /api/replies/{board}', (done) => {
               threadId = res.body[0]._id;
               chai.request(server)
                 .post('/api/replies/funcTest')
-                .send({ thread_id: threadId, text: 'testTextReplyXXX', delete_password: 'passwordTest' })
+                .send({ thread_id: threadId, text: 'testTextReplyXXX', delete_password: 'passwordTest', reported: false })
                 .end(function (err, res) {
                   assert.equal(res.status, 200);
                   done();
