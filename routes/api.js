@@ -105,13 +105,13 @@ app.route('/api/threads/:board')
     const { thread_id, board, text, delete_password } = req.body;
     
     const newReply = { text, delete_password, created_on: new Date(), reported: false };
-    console.log(/*thread_id, board, text, delete_password, */"newReply =",newReply);
+    console.log(/*thread_id, board, text, delete_password, */"APInewReply =",newReply);
     const thread = await modelThread.findByIdAndUpdate(
       thread_id,
       { $push: { replies: newReply }, $set: { bumped_on: new Date() } },
       { new: true }
     ); 
-    console.log("thread =", thread);
+    console.log("APIthread =", thread);
     if (!thread) 
       return res.status(404).send(`No such thread: ${thread_id}.`);
     res.redirect(`/b/${board}/${thread_id}`);
