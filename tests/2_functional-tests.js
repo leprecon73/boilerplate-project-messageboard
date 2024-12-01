@@ -139,16 +139,24 @@ test('6.Creating a new reply: POST request to /api/replies/{board}', (done) => {
         .request(server)
         .post("/api/threads/funcTest")
         .send({
-          //thread_id: threadId,
+          //_id: threadId,
           text: "testTextReply",
           delete_password: "passwordTest"
         })
         .end((err, res) => {
-          threadId = res.body[0]._id;
-          console.log("threadId =", threadId);
-          assert.equal(res.status, 200);
-          
-          done();
+          chai.request(server)
+            .get('/api/threads/funcTest')
+            .end(function (err, res) {
+              threadId = res.body[0]._id;
+              chai.request(server)
+                .post('/api/replies/funcTest')
+                .send({ thread_id: threadId, text: 'testTextReply', delete_password: 'passwordTest' })
+                .end(function (err, res) {
+                  assert.equal(res.status, 200);
+                  done();
+                });
+            });
+        
         });
 });
 /*Viewing a single thread with all replies: GET request to /api/replies/{board}*/
