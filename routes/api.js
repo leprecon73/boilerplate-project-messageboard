@@ -121,8 +121,8 @@ app.route('/api/threads/:board')
      * all its replies, also excluding the same fields from the client as the previous test. */
     let thread = await modelThread
     .findById(req.query.thread_id)
-    .select({ "reported": 0, "delete_password": 0})
-    .lean()//.exec();
+    .select('-reported -delete_password -replies.delete_password -replies.reported')
+    .lean()
 
     if (!thread) {
       res.status(404).send('No such thread');  
