@@ -104,7 +104,7 @@ app.route('/api/threads/:board')
      * least the properties _id, text, created_on, delete_password, & reported. */
     const { thread_id, board, text, delete_password } = req.body;
     
-    const newReply = { text, delete_password, created_on: new Date(), reported: false };
+    const newReply = { _id: new ObjectId(), text, delete_password, created_on: new Date(), reported: false };
     //console.log(/*thread_id, board, text, delete_password, */"APInewReply =",newReply);
     const thread = await modelThread.findByIdAndUpdate(
       thread_id,
@@ -121,8 +121,8 @@ app.route('/api/threads/:board')
      * all its replies, also excluding the same fields from the client as the previous test. */
     let thread = await modelThread
     .findById(req.query.thread_id)
-    .select('-reported -delete_password -replies.delete_password -replies.reported')
-    .lean()
+    .select('-reported -delete_password -replies.reported -replies.delete_password')
+    .lean();
 
     if (!thread) {
       res.status(404).send('No such thread');  
