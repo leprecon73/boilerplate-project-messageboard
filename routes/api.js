@@ -13,7 +13,11 @@ const threadSchema = new mongoose.Schema({
   bumped_on: { type: Date, default: Date.now },
   reported: { type: Boolean, default: false },
   delete_password: String,
-  replies: []
+  replies: [{_id:  {type: ObjectId},
+            text: String,
+            created_on: { type: Date, default: Date.now },
+            delete_password: String,
+            reported: { type: Boolean, default: false }}]
 });
 const modelThread = mongoose.model('Thread', threadSchema) 
 
@@ -115,7 +119,7 @@ app.route('/api/threads/:board')
     //console.log("APIthread =", thread);
     if (!thread) 
       return res.status(404).send(`No such thread: ${thread_id}.`);
-    res.redirect(`/b/${board}/${thread_id}`);
+    return res.redirect(`/b/${board}/${thread_id}`);
   })
   .get(async function (req, res){    
     /**8. You can send a GET request to /api/replies/{board}?thread_id={thread_id}. Returned will be the entire thread with 
@@ -146,20 +150,50 @@ app.route('/api/threads/:board')
 
     /*const thread = await modelThread.findOneAndUpdate({ _id: thread_id, 'replies._id': reply_id, 'replies.delete_password': delete_password },
           { $set: { 'replies.$.text': '[deleted]' }});*/
-    //const thread = await modelThread.findById(req.body.thread_id).exec();
-    console.log("del repl ", thread_id, delete_password, reply_id);
     
-    const thread = await modelThread.findOneAndUpdate(
-      { _id: thread_id, 'replies._id': reply_id, 'replies.delete_password': delete_password },
-      { $set: { 'replies.$.text': '[deleted]' } }
-    );
-    console.log("del repl ", thread);
+    console.log("1del repl ", thread_id, delete_password, reply_id);
 
-    if (!thread || thread === null) return res.send('incorrect password');
-      res.send('success');
-  
-    res.status(500).send('Error deleting reply');
-  
+    let thread = await modelThread.findById(req.body.thread_id).exec();
+    console.log("2del repl thread = ", thread);
+
+    if (!thread) {
+      return res.send('No such thread');
+    }
+
+    const reply = thread.replies.find(e => e['_id'] == req.body.reply_id ); 
+    console.log("2del reply = ", reply);
+
+    if (req.body.delete_password == reply.delete_password) {
+      modelThread.updateOne(
+        {
+          _id: req.body.thread_id, 
+          replies: {$elemMatch: {_id: req.body.reply_id}}
+        }, 
+        {$set: {'replies.$.text': '[deleted]'}}, 
+        {new: true}, 
+
+        function(err, reply) {
+          if(err){
+            console.log("error")
+            return console.error(err);
+          }else{
+            console.log("success")
+            return res.json('success');
+          };
+        }
+      );
+    } else {
+      console.log("incorrect password")
+      return res.json('incorrect password');
+    }
+    
+    /*const thread = await modelThread.findOneAndUpdate(
+      { _id: thread_id  , 'replies._id': reply_id, 'replies.delete_password': delete_password  },
+      { text: 'updated2' }
+    );*/
+    
+
+    
 
   })
   .put(async (req, res) => {
