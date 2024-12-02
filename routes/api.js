@@ -146,7 +146,7 @@ app.route('/api/threads/:board')
 
     /*const thread = await modelThread.findOneAndUpdate({ _id: thread_id, 'replies._id': reply_id, 'replies.delete_password': delete_password },
           { $set: { 'replies.$.text': '[deleted]' }});*/
-    const thread = await modelThread.findById(req.body.thread_id);
+    const thread = await modelThread.findById(req.body.thread_id).exec();
     //console.log("APIthread =", thread, "req.body.thread_id =",req.body.thread_id);
     
     const reply = thread.replies.find(e => e['_id'] == req.body.reply_id ); 
