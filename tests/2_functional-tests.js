@@ -171,8 +171,8 @@ test('7.Viewing a single thread with all replies: GET request to /api/replies/{b
           assert.isArray(res.body.replies);/*
           assert.property(res.body.replies[0], 'text');
           assert.property(res.body.replies[0], 'delete_password');*/
-          console.log("res.body.replies =", res.body.replies);
-          console.log("res.body =", res.body);
+          //console.log("res.body.replies =", res.body.replies);
+          //console.log("res.body =", res.body);
           /*replyId = res.body.replies[0]._id;*/
           done();
         });
