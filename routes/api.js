@@ -149,10 +149,28 @@ app.route('/api/threads/:board')
     const thread = await modelThread.findById(req.body.thread_id);
     //console.log("APIthread =", thread, "req.body.thread_id =",req.body.thread_id);
     
-    if (!thread) {
-      return res.send('incorrect password');
+    const reply = thread.replies.find(e => e['_id'] == req.body.reply_id ); 
+
+    if (req.body.delete_password == reply.delete_password) {
+      modelThread.updateOne(
+        {
+          _id: req.body.thread_id, 
+          replies: {$elemMatch: {_id: req.body.reply_id}}
+        }, 
+        {$set: {'replies.$.text': '[deleted]'}}, 
+        {new: true}, 
+
+        (err, reply) => {
+          if(err){
+            return console.error(err);
+          }else{
+            return res.json('success');
+          };
+        }
+      );
+    } else {
+      return res.json('incorrect password');
     }
-    res.send('success');
 
   })
   .put(async (req, res) => {
