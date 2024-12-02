@@ -146,31 +146,19 @@ app.route('/api/threads/:board')
 
     /*const thread = await modelThread.findOneAndUpdate({ _id: thread_id, 'replies._id': reply_id, 'replies.delete_password': delete_password },
           { $set: { 'replies.$.text': '[deleted]' }});*/
-    const thread = await modelThread.findById(req.body.thread_id).exec();
+    //const thread = await modelThread.findById(req.body.thread_id).exec();
     //console.log("APIthread =", thread, "req.body.thread_id =",req.body.thread_id);
     
-    const reply = thread.replies.find(e => e['_id'] == req.body.reply_id ); 
+    const thread = await modelThread.findOneAndUpdate(
+      { _id: thread_id, 'replies._id': reply_id, 'replies.delete_password': delete_password },
+      { $set: { 'replies.$.text': '[deleted]' } }
+    );
 
-    if (req.body.delete_password == reply.delete_password) {
-      modelThread.updateOne(
-        {
-          _id: req.body.thread_id, 
-          replies: {$elemMatch: {_id: req.body.reply_id}}
-        }, 
-        {$set: {'replies.$.text': '[deleted]'}}, 
-        {new: true}, 
-
-        (err, reply) => {
-          if(err){
-            return console.error(err);
-          }else{
-            return res.json('success');
-          };
-        }
-      );
-    } else {
-      return res.json('incorrect password');
-    }
+    if (!thread) return res.send('incorrect password');
+      res.send('success');
+  
+    res.status(500).send('Error deleting reply');
+  
 
   })
   .put(async (req, res) => {
