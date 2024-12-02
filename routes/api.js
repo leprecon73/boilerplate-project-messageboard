@@ -155,7 +155,7 @@ app.route('/api/threads/:board')
     );
     console.log("del repl ", thread);
 
-    if (!thread) return res.send('incorrect password');
+    if (!thread || thread === null) return res.send('incorrect password');
       res.send('success');
   
     res.status(500).send('Error deleting reply');
