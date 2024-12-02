@@ -153,7 +153,8 @@ app.route('/api/threads/:board')
       { _id: thread_id, 'replies._id': reply_id, 'replies.delete_password': delete_password },
       { $set: { 'replies.$.text': '[deleted]' } }
     );
-
+    console.log("del repl ", thread);
+    
     if (!thread) return res.send('incorrect password');
       res.send('success');
   
