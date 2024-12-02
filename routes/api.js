@@ -13,13 +13,19 @@ const threadSchema = new mongoose.Schema({
   bumped_on: { type: Date, default: Date.now },
   reported: { type: Boolean, default: false },
   delete_password: String,
-  replies: [{_id:  {type: ObjectId},
+  replies: [{_id:  {type: ObjectId, default: new ObjectId()},
             text: String,
             created_on: { type: Date, default: Date.now },
             delete_password: String,
             reported: { type: Boolean, default: false }}]
 });
 const modelThread = mongoose.model('Thread', threadSchema) 
+const A = new mongoose.Schema({
+  text: String,
+  delp: String,
+  replies: [{_id:  {type: ObjectId, default: new ObjectId()}, text: String , delp: String}]
+});
+const mA = mongoose.model('A', A);
 
 module.exports = function (app) {
 
@@ -29,6 +35,10 @@ app.route('/api/threads/:board')
    * text, created_on(date & time), bumped_on(date & time, starts same as created_on), 
    * reported (boolean), delete_password, & replies (array).*/
   
+  const newA = new mA({text:'textA', delp:'delpA',replies:{text:'123',delp:'456'}}) 
+  await newA.save()
+
+
   const { text, delete_password } = req.body
   
   const newThread = new modelThread({
