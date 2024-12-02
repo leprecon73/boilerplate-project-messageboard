@@ -112,7 +112,7 @@ app.route('/api/threads/:board')
       { $push: { replies: newReply }, $set: { bumped_on: new Date() } },
       { new: true }
     ); 
-    console.log("APIthread =", thread);
+    //console.log("APIthread =", thread);
     if (!thread) 
       return res.status(404).send(`No such thread: ${thread_id}.`);
     res.redirect(`/b/${board}/${thread_id}`);
@@ -154,7 +154,7 @@ app.route('/api/threads/:board')
       { $set: { 'replies.$.text': '[deleted]' } }
     );
     console.log("del repl ", thread);
-    
+
     if (!thread) return res.send('incorrect password');
       res.send('success');
   
