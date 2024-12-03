@@ -34,7 +34,7 @@ suite("Functional Tests", function () {
           throw new Error(`${res.status} ${res.statusText}`);
         }
       };*/
-  let threadId;
+  let threadId, replyId;
   let newReply = {
     _id: new ObjectId(),
     text: "new reply",
@@ -174,25 +174,53 @@ suite("Functional Tests", function () {
       .query({ thread_id: threadId })
       .end(function (err, res) {
         assert.equal(res.status, 200);
-        assert.isArray(res.body.replies); /*
-          assert.property(res.body.replies[0], 'text');
-          assert.property(res.body.replies[0], 'delete_password');*/
-        //console.log("res.body.replies =", res.body.replies);
-        //console.log("res.body =", res.body);
-        /*replyId = res.body.replies[0]._id;*/
+        assert.isArray(res.body.replies);
+        replyId = res.body.replies[0]._id;
         done();
       });
   });
-  /*Deleting a reply with the incorrect password: DELETE request to /api/replies/{board} with an invalid delete_password
-test('8.Deleting a reply with the incorrect password: DELETE request to /api/replies/{board} with an invalid delete_password', (done) => {
-  
-});*/
-  /*Deleting a reply with the correct password: DELETE request to /api/replies/{board} with a valid delete_password
-test('9.Deleting a reply with the correct password: DELETE request to /api/replies/{board} with a valid delete_password', (done) => {
-  
-});*/
-  /*Reporting a reply: PUT request to /api/replies/{board} 
-test('10.Reporting a reply: PUT request to /api/replies/{board}', (done) => {
-  
-});*/
+  /*Deleting a reply with the incorrect password: DELETE request to /api/replies/{board} with an invalid delete_password*/
+  test("8.Deleting a reply with the incorrect password: DELETE request to /api/replies/{board} with an invalid delete_password", (done) => {
+    chai
+      .request(server)
+      .delete("/api/replies/funcTest")
+      .send({
+        thread_id: threadId,
+        reply_id: replyId,
+        delete_password: "incorrect",
+      })
+      .end(function (err, res) {
+        assert.equal(res.status, 200);
+        assert.equal(res.text, "incorrect password");
+        done();
+      });
+  });
+  /*Deleting a reply with the correct password: DELETE request to /api/replies/{board} with a valid delete_password*/
+  test("9.Deleting a reply with the correct password: DELETE request to /api/replies/{board} with a valid delete_password", (done) => {
+    chai
+      .request(server)
+      .delete("/api/replies/funcTest")
+      .send({
+        thread_id: threadId,
+        reply_id: replyId,
+        delete_password: "passwordTest",
+      })
+      .end(function (err, res) {
+        assert.equal(res.status, 200);
+        assert.equal(res.text, "success");
+        done();
+      });
+  });
+  /*Reporting a reply: PUT request to /api/replies/{board} */
+  test("10.Reporting a reply: PUT request to /api/replies/{board}", (done) => {
+    chai
+      .request(server)
+      .put("/api/replies/funcTest")
+      .send({ thread_id: threadId, reply_id: replyId })
+      .end(function (err, res) {
+        assert.equal(res.status, 200);
+        assert.equal(res.text, "reported");
+        done();
+      });
+  });
 });
