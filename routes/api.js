@@ -161,7 +161,7 @@ module.exports = function (app) {
       /**10. You can send a DELETE request to /api/replies/{board} and pass along the thread_id, reply_id, & delete_password. Returned
        * will be the string incorrect password or success. On success, the text of the reply_id will be changed to [deleted]. */
       const { thread_id, delete_password, reply_id } = req.body;
-      console.log(thread_id, delete_password, reply_id);
+
       let thread = await modelThread.findById(thread_id).exec();
 
       if (!thread) {
